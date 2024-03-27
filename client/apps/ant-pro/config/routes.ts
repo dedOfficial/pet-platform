@@ -12,6 +12,26 @@
  */
 export default [
   {
+    path: '/demo',
+    name: 'Demo',
+    icon: 'setting',
+    routes: [
+      {
+        name: 'Counter',
+        path: '/demo/counter',
+        component: './Demo/Counter',
+        // icon: 'setting' // sub-page no icon prop
+      },
+      {
+        name: 'Hello World',
+        path: '/demo/hello-world',
+        component: './Demo',
+        // icon: 'smile'
+      },
+    ],
+  },
+
+  {
     path: '/user',
     layout: false,
     routes: [
