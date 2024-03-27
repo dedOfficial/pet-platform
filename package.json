@@ -10,11 +10,6 @@
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx "
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "client/apps/ant-pro/**/*.{js,jsx,ts,tsx}": "tyarn lint-staged:js",
     "client/apps/ant-pro/**/*.{js,jsx,tsx,ts,less,md,json}": [
