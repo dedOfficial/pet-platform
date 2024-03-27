@@ -8,7 +8,7 @@
   "scripts": {
     "prepare": "husky",
     "lint-staged": "lint-staged",
-    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx "
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ./client/apps/**/src"
   },
   "lint-staged": {
     "client/apps/ant-pro/**/*.{js,jsx,ts,tsx}": "tyarn lint-staged:js",
