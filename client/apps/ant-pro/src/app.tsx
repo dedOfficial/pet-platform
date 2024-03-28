@@ -51,6 +51,7 @@ export async function getInitialState(): Promise<{
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
     actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
+    iconfontUrl: '', // https://www.iconfont.cn/
     avatarProps: {
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,

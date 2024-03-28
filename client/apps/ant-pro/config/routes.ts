@@ -17,15 +17,21 @@ export default [
     icon: 'setting',
     routes: [
       {
+        name: 'Hello World',
+        path: '/demo/hello-world',
+        component: './Demo',
+        // icon: 'smile'
+      },
+      {
         name: 'Counter',
         path: '/demo/counter',
         component: './Demo/Counter',
         // icon: 'setting' // sub-page no icon prop
       },
       {
-        name: 'Hello World',
-        path: '/demo/hello-world',
-        component: './Demo',
+        name: 'Diagram',
+        path: '/demo/diagram',
+        component: './Demo/Diagram',
         // icon: 'smile'
       },
     ],
