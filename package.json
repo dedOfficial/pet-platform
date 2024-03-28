@@ -12,7 +12,7 @@
     "server-install": "cd ./server/supabase/supabase && npx supabase start"
   },
   "lint-staged": {
-    "client/apps/ant-pro/**/*.{js,jsx,ts,tsx}": "tyarn lint-staged:js",
+    "client/apps/ant-pro/**/AAAAAAAAAAAAAA.{js,jsx,ts,tsx}": "tyarn lint-staged:js",
     "client/apps/ant-pro/**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
     ]
