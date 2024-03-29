@@ -5,7 +5,7 @@ function Home() {
     const { t } = useTranslation();
 
     return (
-        <div className="min-h-full flex items-center justify-center bg-gray-100">
+        <div className="min-h-full flex items-center justify-center">
             <div className="bg-white p-8 rounded shadow-md">
                 <h1 className="text-4xl font-bold mb-4">{t('welcome')}</h1>
                 <p className="text-gray-600">{t('description')}</p>

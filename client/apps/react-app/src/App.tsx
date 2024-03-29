@@ -1,162 +1,167 @@
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate, useLocation, Link } from 'react-router-dom';
 import {useTranslation} from "react-i18next";
-import { Breadcrumb, Button, ConfigProvider, Layout, Menu, MenuProps, ThemeConfig, Typography, theme } from 'antd';
+import { Breadcrumb, Button, ConfigProvider, Layout, Menu, MenuProps, ThemeConfig, Typography, theme, BreadcrumbProps } from 'antd';
 
 import Home from "./app/pages/Home.tsx";
 import LanguageSelector from "./app/components/LanguageSelector.tsx";
 import Profile from "./app/pages/Profile.tsx";
 import NotFound from "./app/pages/NotFound.tsx";
-import { DesktopOutlined, FileOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, MenuFoldOutlined, MenuUnfoldOutlined, MoonOutlined, SunOutlined, UserOutlined, createFromIconfontCN } from '@ant-design/icons';
 import { useState } from 'react';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
+const IconFont = createFromIconfontCN({
+    scriptUrl: ['//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js', '//at.alicdn.com/t/c/font_4488484_sprgdmiqnx.js'],
+});
+
 const { Header, Footer, Sider, Content } = Layout;
 
-const headerStyle: React.CSSProperties = {
-    padding: '0px',
-    height: '64px',
-    display: 'flex',
-    // position: 'sticky',
-    // top: 0,
-    // left: '15%',
-    // zIndex: 1,
-    // width: '85%',
-};
-  
-const contentStyle: React.CSSProperties = {
-    backgroundColor: '#dddddd',
-};
-
-const breadcrumbStyle: React.CSSProperties = {
-    backgroundColor: '#eeeeee',
-    padding: '16px'
-};
-  
-const siderStyle: React.CSSProperties = {
-    // overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0
-};
-  
-const footerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    // color: '#fff',
-    // height: '55px',
-    backgroundColor: '#fff',
-    padding: '20px 50px'
-};
-  
-const layoutStyle = {
-    // borderRadius: 8,
-    // overflow: 'hidden',
-    // width: 'calc(50% - 8px)',
-    // maxWidth: 'calc(50% - 8px)',
-    minHeight: '100vh'
-};
-
-const config: ThemeConfig = {
+const darkTheme: ThemeConfig = {
     token: {
-        // colorBgBase: '#00b96b',
-        // borderRadius: 5,
-        // colorBgContainer: '#f6ffed',
-        // colorTextBase: 'white',
-        // colorPrimaryText: 
-        
+        colorBgLayout: '#202124',
     },
-    // algorithm: theme.darkAlgorithm
-}
+    components: {
+        Layout: {
+            siderBg: '#1f1f1f',
+            headerBg: '#171717',
+            footerBg: '#171717'
+        },
+        Menu: {
+            popupBg: '#1f1f1f',
+            itemBg: '#1f1f1f',
+            subMenuItemBg: '#1f1f1f',
+            activeBarBorderWidth: 0
+        }
+    },
+    algorithm: theme.darkAlgorithm
+};
 
-function getItem(
+const lightTheme: ThemeConfig = {
+    token: {
+        colorBgLayout: '#ededed',
+    },
+    components: {
+        Layout: {
+            siderBg: '#ffffff',
+            headerBg: '#f9f9f9',
+            footerBg: '#f9f9f9'
+        },
+        Menu: {
+            popupBg: '#ffffff',
+            itemBg: '#ffffff',
+            subMenuItemBg: '#ffffff',
+            activeBarBorderWidth: 0
+        }
+    },
+    algorithm: theme.defaultAlgorithm
+};
+
+const getItem = (
     label: React.ReactNode,
     key: React.Key,
     icon?: React.ReactNode,
     children?: MenuItem[],
-  ): MenuItem {
+): MenuItem => {
     return {
-      key,
-      icon,
-      children,
-      label,
+        key,
+        icon,
+        children,
+        label,
     } as MenuItem;
-  }
+};
 
-const menuItems: MenuItem[] = [
-    getItem('Option 1', '1', <PieChartOutlined />),
-    getItem('Option 2', '2', <DesktopOutlined />),
-    getItem('User', 'sub1', <UserOutlined />, [
-        getItem('Tom', '3'),
-        getItem('Bill', '4'),
-        getItem('Alex', '5'),
-    ]),
-    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-    getItem('Files', '9', <FileOutlined />),
-  ];
+const breadcrumbItemRender: BreadcrumbProps['itemRender'] = (currentRoute, _params, items, paths) => {
+    const isLast = currentRoute?.path === items[items.length - 1]?.path;
+    const itemPath = `${paths.join("/")}`;
+    
+    return isLast ? (
+        <span>{currentRoute.title}</span>
+    ) : (
+        <Link to={itemPath}>{currentRoute.title}</Link>
+    );
+}
 
 function App() {
     const [collapsed, setCollapsed] = useState(false);
-
-    const {
-        token: { colorBgContainer, borderRadiusLG },
-    } = theme.useToken();
+    const [themeType, setThemeType] = useState<'light' | 'dark'>('light');
 
     const { t } = useTranslation();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const menuItems: MenuItem[] = [
+        getItem(
+            <Typography.Text className="text-current" onClick={() => navigate('/')}>
+                {t('home')}
+            </Typography.Text>,
+            'home',
+            <HomeOutlined />
+        ),
+        getItem(
+            <Typography.Text className="text-current" onClick={() => navigate('/profile')}>
+                {t('profile')}
+            </Typography.Text>,
+            'profile', 
+            <UserOutlined />
+        ),
+        // getItem('User', 'sub1', <UserOutlined />, [
+        //     getItem('Tom', '3'),
+        //     getItem('Bill', '4'),
+        //     getItem('Alex', '5'),
+        // ]),
+      ];
+    
+    const breadcrumbItems = location.pathname
+        .split('/')
+        .map(path => ({
+            path,
+            title: t(path) || <HomeOutlined />
+        }));
 
     return (
-        <ConfigProvider theme={config}> 
-                        <Router>
-            <Layout style={layoutStyle}>
-                <Sider style={siderStyle} trigger={null} collapsed={collapsed} collapsible width="15%">
+        <ConfigProvider theme={themeType === 'light' ? lightTheme : darkTheme}> 
+            <Layout className="min-h-screen">
+                <Sider trigger={null} collapsed={collapsed} collapsible width="15%" className='shadow-sm'>
                     <div className="p-8 bg-indigo-600" />
-                    <Menu theme="dark" mode="inline" items={menuItems} />
+                    <Menu mode="inline" items={menuItems} onClick={({ keyPath }) => navigate(`/${keyPath.join('/')}`)} />
                 </Sider>
                 <Layout>
-                    <Header style={headerStyle}>
+                    <Header className="flex items-center gap-4 p-0 h-16 shadow-sm">
                         <Button
                             type="text"
                             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                             onClick={() => setCollapsed(!collapsed)}
-                            style={{
-                                fontSize: '16px',
-                                width: '64px',
-                                height: '100%',
-                                color: 'white'
-                            }}
+                            className="min-w-10 h-full rounded-none flex items-center justify-center"
                         />
-                        <ul className="flex align-middle w-full">
-                            <li className={"mx-2.5"}>
-                                <Typography.Link>
-                                    <Link to="/">{t('home')}</Link>
-                                </Typography.Link>
-                            </li>
-                            <li className={"mx-2.5"}>
-                                <Typography.Link>
-                                    <Link to="/profile">{t('profile')}</Link>
-                                </Typography.Link>
-                            </li>
-                            <li className={'ml-auto flex align-middle pr-5'}>
-                                <LanguageSelector />
-                            </li>
-                        </ul>
+                        <Breadcrumb className="flex items-center" items={breadcrumbItems} itemRender={breadcrumbItemRender} />
+                        <div className="ml-auto flex items-center pr-5 gap-3">
+                            <Button 
+                                type="text" 
+                                icon={themeType === 'light' ? <MoonOutlined /> : <SunOutlined /> } 
+                                onClick={() => setThemeType((prev) => prev === 'light' ? 'dark' : 'light')}
+                            />
+                            <LanguageSelector />
+                        </div>
                     </Header>
-                    <Content style={contentStyle}>
-                        <Breadcrumb style={breadcrumbStyle}>
-                            <Breadcrumb.Item>User</Breadcrumb.Item>
-                            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                        </Breadcrumb>
-
+                    <Content>
                             <Routes>
-                                <Route path="/" element={<Home />} />
+                                <Route path="/" element={<Navigate to="/home" />} />
+                                <Route path="/home" element={<Home />} />
                                 <Route path="/profile" element={<Profile />} />
                                 <Route path="/*" element={<NotFound />} />
                             </Routes>
                     </Content>
-                    <Footer style={footerStyle}>
-                        Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    <Footer className="text-center px-12 py-5 shadow">
+                        Pet Platform ©{new Date().getFullYear()} Created by Konstantin Karpov 
+                        ({<IconFont type="icon-telegram" />}:<Typography.Link target='_blank' href="https://t.me/frontend_leader">@frontend_leader</Typography.Link> 
+                        / 
+                        <IconFont type="icon-github" />:<Typography.Link target="_blank" href="https://github.com/dedOfficial">dedOfficial</Typography.Link>)
                     </Footer>
                 </Layout>
             </Layout>
-            
-                        </Router>
         </ConfigProvider>
+            
     );
 }
 

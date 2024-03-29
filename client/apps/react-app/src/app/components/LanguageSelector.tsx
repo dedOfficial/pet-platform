@@ -1,4 +1,7 @@
 import React from 'react';
+import { Select } from 'antd';
+import { TranslationOutlined } from '@ant-design/icons';
+
 import {LANGUAGES} from "../constants/languages.ts";
 import {useDispatch, useSelector} from "react-redux";
 import {setLanguage} from "../redux/actions.ts";
@@ -12,25 +15,20 @@ const LanguageSelector: React.FC = () => {
 
     const {i18n} = useTranslation();
 
-    const changeLanguage = (newLanguage: string) => {
+    const handleChangeLanguage = (newLanguage: string) => {
         dispatch(setLanguage(newLanguage))
         i18n.changeLanguage(newLanguage).then(() => console.log("Language changes is successful"));
     };
 
     return (
-        <div className="flex items-center space-x-4">
-            {LANGUAGES.map((language) => (
-                <button
-                    key={language.code}
-                    className={`text-sm font-medium ${
-                        language.code === selectedLanguage ? 'text-blue-50' : 'text-gray-500 hover:text-white'
-                    }`}
-                    onClick={() => changeLanguage(language.code)}
-                >
-                    {language.name}
-                </button>
-            ))}
-        </div>
+        <Select
+            suffixIcon={<TranslationOutlined />}
+            defaultValue="en"
+            value={selectedLanguage}
+            className="w-24"
+            onChange={handleChangeLanguage}
+            options={LANGUAGES}
+        />
     );
 };
 
