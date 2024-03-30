@@ -2,7 +2,7 @@ import { SET_LANGUAGE } from './actions';
 import {IAppState} from "../types/IAppState.ts";
 
 const initialState: IAppState = {
-    language: 'en',
+    language: 'ru',
 };
 
 const appReducer = (state = initialState, action: any) => {

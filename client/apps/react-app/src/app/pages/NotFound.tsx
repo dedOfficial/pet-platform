@@ -1,17 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {useTranslation} from "react-i18next";
+import { Result, Button, Flex, Typography } from 'antd';
 
 const NotFound: React.FC = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    const handleBackHome = () => navigate('/home')
     
     return (
-        <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-                <h1 className="text-4xl font-bold text-gray-800">{t('notFoundTitle')}</h1>
-                <p className="text-gray-600 mt-2">{t('notFoundDescription')}</p>
-                {/* You can add more content or styling as needed */}
-            </div>
-        </div>
+        <Flex align='center' justify='center' className="h-full w-full">
+            <Result
+                status="404"
+                title={<Typography.Title level={2}>{t('not_found_page_title')}</Typography.Title>}
+                subTitle={t('not_found_page_description')}
+                extra={<Button type="primary" onClick={handleBackHome}>{t('home')}</Button>}
+            />
+        </Flex>
     );
 };
 

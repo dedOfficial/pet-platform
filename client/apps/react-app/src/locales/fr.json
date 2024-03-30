@@ -1,11 +1,13 @@
 {
-  "home": "Accueil",
-  "profile": "Profil",
-  "welcome": "Bienvenue à Vite + Tailwind CSS",
-  "description": "Modifiez src/app/pages/Home.tsx et enregistrez pour recharger.",
-  "link": "Documentation de Vite",
-  "authPageTitle": "Accès non autorisé",
-  "authPageDescription": "Désolé, vous n'avez pas la permission d'accéder à cette page. Veuillez contacter l'administrateur.",
-  "notFoundTitle": "404 - Non trouvé",
-  "notFoundDescription": "Désolé, la page que vous recherchez n'existe pas."
+  "created_by" : "Créé par",
+  "demo" : "Démo",
+  "document" : "Document",
+  "home" : "Accueil",
+  "link" : "Lien",
+  "not_authorized_page_description" : "Désolé, vous n'êtes pas autorisé à accéder à cette page. Veuillez contacter l'administrateur.",
+  "not_authorized_page_title" : "403 - Non autorisé",
+  "not_found_page_description" : "Désolé, la page que vous recherchez n'existe pas.",
+  "not_found_page_title" : "404 - Non trouvé",
+  "profile" : "Profil",
+  "welcome" : "Bienvenue"
 }

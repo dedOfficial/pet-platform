@@ -9,11 +9,10 @@ import {IAppState} from "../types/IAppState.ts";
 import {useTranslation} from "react-i18next";
 
 const LanguageSelector: React.FC = () => {
-
     const dispatch = useDispatch();
     const selectedLanguage = useSelector((state: IAppState) => state.language);
 
-    const {i18n} = useTranslation();
+    const { i18n } = useTranslation();
 
     const handleChangeLanguage = (newLanguage: string) => {
         dispatch(setLanguage(newLanguage))
@@ -23,7 +22,7 @@ const LanguageSelector: React.FC = () => {
     return (
         <Select
             suffixIcon={<TranslationOutlined />}
-            defaultValue="en"
+            defaultValue="ru"
             value={selectedLanguage}
             className="w-24"
             onChange={handleChangeLanguage}

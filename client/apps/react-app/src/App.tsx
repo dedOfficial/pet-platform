@@ -8,6 +8,7 @@ import Profile from "./app/pages/Profile.tsx";
 import NotFound from "./app/pages/NotFound.tsx";
 import { HomeOutlined, MenuFoldOutlined, MenuUnfoldOutlined, MoonOutlined, SunOutlined, UserOutlined, createFromIconfontCN } from '@ant-design/icons';
 import { useState } from 'react';
+import PageContainer from './app/components/PageContainer.tsx';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -145,15 +146,17 @@ function App() {
                         </div>
                     </Header>
                     <Content>
-                            <Routes>
-                                <Route path="/" element={<Navigate to="/home" />} />
-                                <Route path="/home" element={<Home />} />
-                                <Route path="/profile" element={<Profile />} />
-                                <Route path="/*" element={<NotFound />} />
-                            </Routes>
+
+                        <Routes>
+                            <Route path="/" element={<Navigate to="/home" />} />
+                            <Route path="/home" element={<Home />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/*" element={<NotFound />} />
+                        </Routes>
+
                     </Content>
                     <Footer className="text-center px-12 py-5 shadow">
-                        Pet Platform ©{new Date().getFullYear()} Created by Konstantin Karpov 
+                        Pet Platform ©{new Date().getFullYear()}. {t('created_by')} Konstantin Karpov 
                         ({<IconFont type="icon-telegram" />}:<Typography.Link target='_blank' href="https://t.me/frontend_leader">@frontend_leader</Typography.Link> 
                         / 
                         <IconFont type="icon-github" />:<Typography.Link target="_blank" href="https://github.com/dedOfficial">dedOfficial</Typography.Link>)

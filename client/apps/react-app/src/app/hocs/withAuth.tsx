@@ -5,6 +5,7 @@ import UnauthorizedPage from "../pages/UnauthorizedPage.tsx";
 const withAuth = (Component: React.FunctionComponent) => {
     return () => {
         const [isAuth, setIsAuth] = useState<boolean>(true);
+
         useEffect(() => {
             const token = Cookie.getCookie("YOUR_TOKEN_CREDENTIALS" || '');
             setIsAuth(Boolean(token));

@@ -1,0 +1,13 @@
+{
+  "created_by" : "Жасалған",
+  "demo" : "Демо",
+  "document" : "Құжат",
+  "home" : "Негізгі бет",
+  "link" : "Сілтеме",
+  "not_authorized_page_description" : "Кешіріңіз, бұл бетке кіру құқығыңыз жоқ. Әдмінімен хабарласыңыз.",
+  "not_authorized_page_title" : "403 - Авторизация жоқ",
+  "not_found_page_description" : "Кешіріңіз, іздеген бет табылмады.",
+  "not_found_page_title" : "404 - Табылмады",
+  "profile" : "Профиль",
+  "welcome" : "Қош келдіңіз"
+}

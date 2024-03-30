@@ -1,11 +1,13 @@
 {
-  "home": "Home",
-  "profile": "Profile",
-  "welcome": "Welcome to Vite + Tailwind CSS",
-  "description": "Edit src/app/pages/Home.tsx and save to reload.",
-  "link": "Vite Documentation",
-  "authPageTitle": "Unauthorized Access",
-  "authPageDescription": "Sorry, you don't have permission to access this page. Please contact the administrator.",
-  "notFoundTitle": "404 - Not Found",
-  "notFoundDescription": "Sorry, the page you are looking for does not exist."
+  "created_by" : "Created by",
+  "demo" : "Demo",
+  "document" : "Document",
+  "home" : "Home",
+  "link" : "Link",
+  "not_authorized_page_description" : "Sorry, you are not authorized to access this page. Please contact the administrator.",
+  "not_authorized_page_title" : "403 - Not Authorized",
+  "not_found_page_description" : "Sorry, the page you are looking for does not exist.",
+  "not_found_page_title" : "404 - Not Found",
+  "profile" : "Profile",
+  "welcome" : "Welcome"
 }

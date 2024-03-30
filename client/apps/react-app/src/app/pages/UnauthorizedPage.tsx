@@ -1,18 +1,23 @@
 import React from 'react';
 import {useTranslation} from "react-i18next";
+import { useNavigate } from 'react-router-dom';
+import { Result, Button, Flex, Typography } from 'antd';
 
 const UnauthorizedPage: React.FC = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
+    const handleBackHome = () => navigate('/home')
+    
     return (
-        <div className="flex h-full items-center justify-center">
-            <div className="p-6 max-w-sm w-full bg-white shadow-md rounded-md">
-                <h2 className="text-2xl font-bold mb-4 text-black">{t('authPageTitle')}</h2>
-                <p className="text-gray-600">
-                    {t('authPageDescription')}
-                </p>
-            </div>
-        </div>
+        <Flex align='center' justify='center' className="h-full w-full">
+            <Result
+                status="403"
+                title={<Typography.Title level={2}>{t('not_authorized_page_title')}</Typography.Title>}
+                subTitle={t('not_authorized_page_description')}
+                extra={<Button type="primary" onClick={handleBackHome}>{t('home')}</Button>}
+            />
+        </Flex>
     );
 };
 
